@@ -1,5 +1,5 @@
 @Test
-Feature: Validation
+Feature: Validation of hotel booking
 
 Scenario Outline:
 	Given the user initiates webdriver and launch booking site
