@@ -27,9 +27,11 @@ public class Rateselection {
 	
 	WebDriver driver;
 	
-	By hotel_rate_flex = By.xpath("//*[@id='hotel-info-root']/div/div/div/div[2]/div[1]/div[3]/div[2]/label");
+	By flex_label = By.xpath("//*[contains(@class, 'base-typography') and contains(text(), 'Flex') and not(contains(text(), '-'))]");
+	By hotel_rate_flex = By.xpath("//*[contains(@class, 'base-typography') and contains(text(), 'Flex') and not(contains(text(), '-'))]//ancestor::div[@class='grid-row']/div[2]/label");
 	By booking = By.xpath("//button[text()='Book now']");
-	By hotel_rate_text = By.xpath("//*[@id='bookingID']/div/div/div/div[2]/div[2]/span[2]");
+	By hotel_rate_text = By.xpath("//*[contains(@class, 'tarrif')]");
+	By hotel_booking_name = By.xpath("//*[contains(@class, '__hotel')]");
 	
 	
 	public Rateselection(WebDriver driver) {
@@ -40,6 +42,11 @@ public class Rateselection {
 	public void hotel_rate_selection() throws InterruptedException {
 		
 		Thread.sleep(5000);
+		
+		
+		
+		((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", driver.findElement(flex_label));
+		
 		((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(hotel_rate_flex));
 		
 	}
@@ -62,7 +69,7 @@ public class Rateselection {
 		
 		FileWriter file = new FileWriter("C:\\Users\\malli\\Desktop\\testing.csv");
 
-		String hotel_name = driver.findElement(By.xpath("//*[@id='bookingID']/div/div/div/div[2]/h4")).getText();
+		String hotel_name = driver.findElement(hotel_booking_name).getText();
 		System.out.println(hotel_name);
 		file.append("\n");
 		file.write(hotel_name);

@@ -10,6 +10,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import PageObjects.Homepage;
 import PageObjects.Hotelresults;
 import PageObjects.Rateselection;
+import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -24,7 +25,7 @@ public class TestSteps  {
 	Rateselection rateselection;
  
 	
-	@Given("the user initiates webdriver")
+	@Given("the user initiates webdriver and launch booking site")
 	public void startup() {
 
 		System.setProperty("webdriver.chrome.driver","C:\\Users\\malli\\Downloads\\chromedriver_win32\\chromedriver.exe");
@@ -67,12 +68,12 @@ public class TestSteps  {
 	
 	@And("the user verifies hotel rate text")
 	public void hotel_rate_text() throws IOException {
-		rateselection.hotel_rate_text_verification("Flex");
+		rateselection.hotel_rate_text_verification("Rate: Flex");
 		rateselection.csv_writing();
 	}
 	
 	
-	@Then("user closed the browser")
+	@After
 	public void quit() {
 		
 		driver.close();
